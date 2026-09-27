@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://patourisg.github.io/g.patouris/sitemap.xml
