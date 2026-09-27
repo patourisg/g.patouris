@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Booked — G. Patouris Lift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#181A16;
+    --charcoal-2:#22251F;
+    --merlo-green:#7CB518;
+    --amber:#F2A900;
+    --steel:#9A9D93;
+    --off-white:#F3F1E7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--charcoal);
+    color:var(--off-white);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 5%;
+  }
+  .card{
+    max-width:560px;
+    width:100%;
+    text-align:center;
+  }
+  .check{
+    width:64px; height:64px;
+    margin:0 auto 1.8rem;
+    border-radius:50%;
+    background:rgba(124,181,24,.12);
+    border:1.5px solid var(--merlo-green);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .check svg{width:28px;height:28px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--merlo-green);
+    margin-bottom:.9rem;
+  }
+  h1{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(1.6rem, 4vw, 2.3rem);
+    text-transform:uppercase;
+    line-height:1.2;
+    margin-bottom:1.2rem;
+  }
+  p{
+    font-size:1rem;
+    line-height:1.6;
+    color:var(--steel);
+    margin-bottom:.9rem;
+  }
+  p strong{color:var(--off-white); font-weight:600;}
+  #when{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.95rem;
+    color:var(--off-white);
+    background:var(--charcoal-2);
+    border:1px solid rgba(154,157,147,.25);
+    border-radius:4px;
+    padding:.9rem 1.2rem;
+    margin:1.4rem 0;
+    display:none; /* only shown if we can read a date/time from the URL */
+  }
+  .actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.9rem;
+    justify-content:center;
+    margin-top:1.8rem;
+  }
+  .btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:.88rem;
+    text-decoration:none;
+    padding:.8rem 1.4rem;
+    border-radius:2px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--merlo-green); color:var(--charcoal);}
+  .btn-primary:hover{background:var(--amber); transform:translateY(-1px);}
+  .btn-ghost{border:1px solid rgba(154,157,147,.4); color:var(--off-white);}
+  .btn-ghost:hover{border-color:var(--merlo-green); color:var(--merlo-green);}
+  .foot{
+    margin-top:2.6rem;
+    font-size:.78rem;
+    color:rgba(154,157,147,.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="check">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 12.5L9.5 18L20 6" stroke="#7CB518" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="eyebrow">Booking Received</div>
+  <h1>Your job is booked.</h1>
+  <p>Thanks for booking with <strong>G. Patouris Lift</strong>. Your request has been sent through, and George will confirm the details with you directly before the job.</p>
+  <div id="when"></div>
+  <p>If anything about the timing, location, or job needs to change, just contact George directly using the details below.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="tel:+35799630273">Call 99 630 273</a>
+    <a class="btn btn-ghost" href="https://wa.me/35799630273" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn btn-ghost" href="index.html">Back to site</a>
+  </div>
+  <div class="foot">G. PATOURIS · MERLO TELEHANDLER HIRE · LIMASSOL</div>
+</div>
+
+<script>
+  // Best-effort: if Cal.com forwarded a start time in the URL, show it.
+  // If the parameter isn't present (custom fields aren't forwarded by Cal.com),
+  // this section just stays hidden rather than showing broken/blank info.
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    var candidates = ['startTime', 'date', 'start', 'booking_start_time'];
+    var raw = null;
+    for (var i = 0; i < candidates.length; i++) {
+      if (params.get(candidates[i])) { raw = params.get(candidates[i]); break; }
+    }
+    if (!raw) return;
+    var d = new Date(raw);
+    if (isNaN(d.getTime())) return;
+    var opts = { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' };
+    var el = document.getElementById('when');
+    el.textContent = d.toLocaleString(undefined, opts);
+    el.style.display = 'block';
+  })();
+</script>
+
+</body>
+</html>
