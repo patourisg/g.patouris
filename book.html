@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book — George Patouris Merlo 17m Telehandler</title>
+<title>Contact — George Patouris Merlo 17m Telehandler</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -15,15 +15,15 @@
     --steel:#9A9D93;
     --steel-light:#C9CBC2;
     --off-white:#F3F1E7;
-    --rivet:#4A4C43;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
   body{
     background:var(--charcoal);
     color:var(--off-white);
     font-family:'Inter',sans-serif;
-    overflow-x:hidden;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
   }
   @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
 
@@ -36,15 +36,13 @@
     display:flex;
     align-items:center;
     gap:.6rem;
+    justify-content:center;
   }
-  .eyebrow::before{content:""; width:22px;height:2px; background:var(--amber); display:inline-block;}
+  .eyebrow::before,.eyebrow::after{content:""; width:22px;height:2px; background:var(--amber); display:inline-block;}
 
   header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
     display:flex;align-items:center;justify-content:space-between;
     padding:1.1rem 5%;
-    background:rgba(24,26,22,.9);
-    backdrop-filter:blur(8px);
     border-bottom:1px solid rgba(154,157,147,.18);
   }
   .logo{
@@ -63,293 +61,152 @@
   .back-link:hover{border-color:var(--merlo-green);}
 
   .hazard-strip{
-    height:10px;
+    height:8px;
     background-image:repeating-linear-gradient(135deg, var(--amber) 0 18px, var(--charcoal-2) 18px 36px);
     opacity:.85;
   }
 
-  .ticker{
-    overflow:hidden;
-    background:var(--charcoal-2);
-    border-bottom:1px solid rgba(154,157,147,.18);
-    white-space:nowrap;
+  main{
+    flex:1;
+    padding:3rem 5% 4rem;
   }
-  .ticker-track{
-    display:inline-flex;
-    align-items:center;
-    padding:.65rem 0;
-    animation:tickerScroll 24s linear infinite;
-  }
-  .ticker:hover .ticker-track{ animation-play-state:paused; }
-  .ticker-item{
-    font-family:'Oswald',sans-serif;
-    font-size:.76rem; font-weight:600; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--steel-light);
-    flex:none; padding:0 1.4rem;
-  }
-  .ticker-item.phone{ color:var(--amber); }
-  .ticker-sep{ color:var(--merlo-green); flex:none; font-size:.65rem; }
-
-  main{padding:9rem 5% 5rem;}
-  .wrap{max-width:1180px; margin:0 auto;}
-  .page-head{max-width:38rem;}
-  .page-head h1{
+  .wrap{max-width:1000px; width:100%; margin:0 auto; text-align:center;}
+  .wrap h1{
     font-family:'Archivo Black',sans-serif;
-    font-size:clamp(2rem,4.4vw,3.2rem);
+    font-size:clamp(2rem,5vw,3rem);
     text-transform:uppercase;
-    line-height:1.04;
-    margin:.7rem 0 1rem;
+    line-height:1.05;
+    margin:.8rem 0 1rem;
   }
-  .page-head h1 em{font-style:normal; color:var(--merlo-green);}
-  .page-head p{color:var(--steel-light); line-height:1.65; font-size:1.02rem;}
+  .wrap h1 em{font-style:normal; color:var(--merlo-green);}
+  .wrap > p.sub{
+    color:var(--steel-light);
+    line-height:1.65;
+    font-size:1.02rem;
+    max-width:34rem;
+    margin:0 auto 2.6rem;
+  }
 
-  .head-row{
-    display:grid;
-    grid-template-columns:1.35fr 1fr;
-    gap:3rem;
+  .booking-panel{
+    background:var(--charcoal-2);
+    border:1px solid rgba(154,157,147,.25);
+    border-radius:10px;
+    padding:1.2rem;
+    margin-bottom:3rem;
+    text-align:left;
+  }
+  #my-cal-inline{
+    width:100%;
+    min-height:650px;
+    overflow:hidden;
+    border-radius:6px;
+  }
+  .booking-fallback{
+    display:none;
+    padding:2.5rem 1.5rem;
+    text-align:center;
+    color:var(--steel-light);
+    font-size:.95rem;
+    line-height:1.6;
+  }
+  .booking-fallback a{color:var(--merlo-green); font-weight:600;}
+
+  .direct-divider{
+    display:flex;
     align-items:center;
-    margin-bottom:3.2rem;
+    gap:1rem;
+    color:var(--steel);
+    font-family:'Oswald',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    margin:2.6rem 0 1.8rem;
+  }
+  .direct-divider::before,.direct-divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:rgba(154,157,147,.25);
   }
 
-  .layout{
+  .contact-grid{
     display:grid;
-    grid-template-columns:.85fr 1.15fr;
-    gap:3rem;
-    align-items:start;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.1rem;
   }
-
-  /* ===== CONTACT COLUMN ===== */
-  .contact-card{
+  .contact-tile{
     background:var(--charcoal-2);
     border:1px solid rgba(154,157,147,.25);
     border-radius:6px;
-    padding:2rem 1.8rem;
-    position:sticky;
-    top:8rem;
-  }
-  .contact-card .tag{
-    font-family:'Oswald',sans-serif; font-size:.68rem; letter-spacing:.22em;
-    text-transform:uppercase; color:var(--steel);
-    border-bottom:1px dashed rgba(154,157,147,.35);
-    padding-bottom:.9rem; margin-bottom:1.1rem;
-    display:block;
-  }
-  .contact-line{
-    display:flex; align-items:center; gap:.9rem;
-    padding:.9rem 0;
-    border-bottom:1px solid rgba(154,157,147,.16);
+    padding:2rem 1.2rem;
     text-decoration:none;
     color:var(--off-white);
-    transition:padding-left .15s ease, color .15s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.9rem;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
   }
-  .contact-line:last-of-type{border-bottom:none;}
-  .contact-line:hover{padding-left:.35rem; color:var(--merlo-green);}
-  .contact-line .ic{
-    width:36px;height:36px;flex:none;border-radius:2px;
+  .contact-tile:hover{
+    transform:translateY(-4px);
+    border-color:var(--merlo-green);
+    background:rgba(124,181,24,.06);
+  }
+  .contact-tile .ic{
+    width:56px;height:56px;
+    border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     background:rgba(124,181,24,.12);
     color:var(--merlo-green);
   }
-  .contact-line .ic svg{width:17px;height:17px;}
-  .contact-line .meta .k{
-    font-family:'Oswald',sans-serif; font-size:.66rem; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--steel); display:block; margin-bottom:.15rem;
+  .contact-tile.whatsapp .ic{background:rgba(37,211,102,.12); color:#25D366;}
+  .contact-tile.viber .ic{background:rgba(115,96,242,.12); color:#7360F2;}
+  .contact-tile .ic svg{width:26px;height:26px;}
+  .contact-tile .label{
+    font-family:'Oswald',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--steel);
   }
-  .contact-line .meta .v{font-family:'IBM Plex Mono',monospace; font-size:.95rem; font-weight:600;}
+  .contact-tile .value{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:1.05rem;
+  }
 
   .plate-mini{
+    margin-top:2.6rem;
     background:linear-gradient(155deg, #3A3D34, #23251F 60%);
     border:1px solid rgba(154,157,147,.35);
     border-radius:6px;
-    padding:1.2rem 1.3rem;
+    padding:1.3rem 1.5rem;
+    display:inline-flex;
+    gap:2rem;
+    flex-wrap:wrap;
+    justify-content:center;
   }
-  .plate-mini .row{
-    display:flex; justify-content:space-between;
-    font-family:'IBM Plex Mono',monospace; font-size:.8rem;
-    padding:.32rem 0; color:var(--steel-light);
+  .plate-mini .item{text-align:left;}
+  .plate-mini .item .k{
+    font-family:'Oswald',sans-serif; font-size:.62rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--steel); display:block; margin-bottom:.15rem;
   }
-  .plate-mini .row .k{color:var(--steel);}
-  .plate-mini .row .v{color:var(--off-white); font-weight:600;}
-  .plate-mini .row .v.green{color:var(--merlo-green);}
-
-  /* ===== FORM COLUMN ===== */
-  .form-card{
-    background:var(--charcoal-2);
-    border:1px solid rgba(154,157,147,.25);
-    border-radius:6px;
-    padding:2.2rem;
-  }
-  .form-card h2{
-    font-family:'Archivo Black',sans-serif;
-    font-size:1.3rem; text-transform:uppercase; margin-bottom:.3rem;
-  }
-  .form-card .sub{color:var(--steel-light); font-size:.92rem; margin-bottom:1.8rem;}
-
-  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;}
-  .field{margin-bottom:1.3rem;}
-  .field label{
-    display:block;
-    font-family:'Oswald',sans-serif; font-size:.7rem; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--steel); margin-bottom:.5rem;
-  }
-  .field input,
-  .field select,
-  .field textarea{
-    width:100%;
-    background:var(--charcoal);
-    border:1px solid rgba(154,157,147,.3);
-    border-radius:2px;
-    color:var(--off-white);
-    padding:.8rem .9rem;
-    font-family:'Inter',sans-serif;
-    font-size:.95rem;
-    transition:border-color .15s ease;
-  }
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus{
-    outline:none;
-    border-color:var(--merlo-green);
-  }
-  .field textarea{resize:vertical; min-height:100px;}
-  .field select{
-    appearance:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%239A9D93' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;
-    background-position:right .9rem center;
-    padding-right:2.2rem;
-  }
-
-  .submit-btn{
-    width:100%;
-    font-family:'Oswald',sans-serif; font-weight:600; letter-spacing:.03em;
-    text-transform:uppercase; font-size:.98rem;
-    background:var(--merlo-green); color:var(--charcoal);
-    padding:1.05rem; border:none; border-radius:2px;
-    cursor:pointer;
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-  }
-  .submit-btn:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(124,181,24,.25);}
-
-  .form-note{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.78rem;
-    color:var(--steel);
-    margin-top:1rem;
-    line-height:1.6;
-  }
-
-  .confirm-box{
-    display:none;
-    background:rgba(124,181,24,.1);
-    border:1px solid var(--merlo-green);
-    border-radius:4px;
-    padding:1.2rem 1.4rem;
-    margin-top:1.4rem;
-    font-size:.92rem;
-    color:var(--steel-light);
-  }
-  .confirm-box.show{display:block;}
-  .confirm-box strong{color:var(--merlo-green);}
+  .plate-mini .item .v{font-family:'IBM Plex Mono',monospace; font-size:.9rem; font-weight:600;}
+  .plate-mini .item .v.green{color:var(--merlo-green);}
 
   footer{
-    background:var(--charcoal);
-    padding:2.4rem 5%;
-    display:flex; justify-content:space-between; align-items:center;
-    flex-wrap:wrap; gap:1rem;
+    padding:2rem 5%;
+    text-align:center;
     border-top:1px solid rgba(154,157,147,.18);
   }
-  footer p{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--steel);}
+  footer p{font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:var(--steel);}
 
-  @media (max-width:860px){
-    .head-row{grid-template-columns:1fr;gap:1.6rem;}
-    .layout{grid-template-columns:1fr;}
-    .contact-card{position:static;}
-    .field-row{grid-template-columns:1fr;}
-  }
-
-  /* ===== CUSTOM FLASH CURSOR ===== */
-  body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button,
-  body.has-custom-cursor input, body.has-custom-cursor select, body.has-custom-cursor textarea{
-    cursor:none;
-  }
-  #flashCursor{
-    position:fixed; top:0; left:0; width:22px; height:22px;
-    pointer-events:none; z-index:9999;
-    transform:translate(-50%,-50%);
-    border:1.5px solid var(--amber);
-    border-radius:50%;
-    background:transparent;
-    transition:width .15s ease, height .15s ease, background .15s ease, border-color .15s ease;
-    will-change:transform;
-  }
-  #flashCursor.pointer{
-    width:34px;height:34px;
-    background:rgba(124,181,24,.12);
-    border-color:var(--merlo-green);
-  }
-  #cursorDot{
-    position:fixed; top:0; left:0; width:5px; height:5px; border-radius:50%;
-    background:var(--off-white); pointer-events:none; z-index:9999;
-    transform:translate(-50%,-50%);
-  }
-
-  /* ===== SCROLL REVEAL ===== */
-  .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in-view{opacity:1; transform:translateY(0);}
-  .reveal.d1{transition-delay:.08s;}
-  .reveal.d2{transition-delay:.16s;}
-
-  /* ===== LIVE HAZARD STRIP ANIMATION ===== */
-  .hazard-strip{
-    background-size:200% 100%;
-    animation:hazardMove 6s linear infinite;
-  }
-  @keyframes hazardMove{ to{ background-position:-72px 0; } }
-  @keyframes tickerScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-
-  /* ===== LIVE STATUS DOT ===== */
-  .tag{display:flex !important; align-items:center; gap:.55rem;}
-  .live-dot{
-    width:8px; height:8px; border-radius:50%; background:var(--merlo-green); flex:none;
-    box-shadow:0 0 0 0 rgba(124,181,24,.6);
-    animation:livePulse 1.8s ease-out infinite;
-  }
-  @keyframes livePulse{
-    0%{ box-shadow:0 0 0 0 rgba(124,181,24,.55); }
-    70%{ box-shadow:0 0 0 8px rgba(124,181,24,0); }
-    100%{ box-shadow:0 0 0 0 rgba(124,181,24,0); }
-  }
-
-  /* ===== PLATE TILT ===== */
-  .plate-mini{ transition:transform .15s ease, box-shadow .15s ease; transform-style:preserve-3d; }
-  .plate-mini:hover{ box-shadow:0 14px 30px rgba(0,0,0,.35); }
-
-  /* ===== CONTACT LINE ICON LIVELINESS ===== */
-  .contact-line .ic{ transition:background .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease; }
-  .contact-line:hover .ic{
-    background:rgba(124,181,24,.22);
-    transform:scale(1.08) rotate(-4deg);
-    box-shadow:0 0 14px rgba(124,181,24,.35);
-  }
-
-  /* ===== SUBMIT BUTTON RIPPLE ===== */
-  .submit-btn{ position:relative; overflow:hidden; }
-  .ripple{
-    position:absolute; border-radius:50%; background:rgba(24,26,22,.35);
-    transform:scale(0); animation:rippleOut .6s ease-out forwards; pointer-events:none;
-  }
-  @keyframes rippleOut{ to{ transform:scale(1); opacity:0; } }
-
-  @media (pointer:coarse){
-    #flashCursor, #cursorDot{ display:none !important; }
+  @media (max-width:640px){
+    .contact-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
 <body>
-
-<div id="flashCursor" aria-hidden="true"></div>
-<div id="cursorDot" aria-hidden="true"></div>
 
 <header>
   <a class="logo" href="index.html">G. PATOURIS <span>· LIFT</span></a>
@@ -357,243 +214,118 @@
 </header>
 <div class="hazard-strip"></div>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">17M Reach</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Owner-Operated</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Same-Day Availability</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item phone">Call 99 630 273</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Limassol &amp; Surrounding Areas</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Mon–Sat · 8am–5pm</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">17M Reach</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Owner-Operated</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Same-Day Availability</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item phone">Call 99 630 273</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Limassol &amp; Surrounding Areas</span><span class="ticker-sep">◆</span>
-    <span class="ticker-item">Mon–Sat · 8am–5pm</span><span class="ticker-sep">◆</span>
-  </div>
-</div>
-
 <main>
   <div class="wrap">
-    <div class="head-row">
-      <div class="page-head reveal">
-        <div class="eyebrow">Book the Merlo</div>
-        <h1>Get the <em>17m reach</em><br>on your site.</h1>
-        <p>Send the job details below and George will confirm availability directly — or skip the form and reach him straight away using any of the contacts on the left.</p>
-      </div>
+    <div class="eyebrow">Book Online</div>
+    <h1>Get the <em>17m reach</em><br>on your site.</h1>
+    <p class="sub">Pick a date and time, tell us the job site and what you need done — George gets it directly on his calendar. Prefer to talk first? Call or WhatsApp below.</p>
 
-      <div class="plate-mini reveal d1">
-        <div class="row"><span class="k">MODEL</span><span class="v">MERLO</span></div>
-        <div class="row"><span class="k">REACH</span><span class="v green">17M</span></div>
-        <div class="row"><span class="k">WORKING DAYS</span><span class="v green">MON–SAT · 8AM–5PM</span></div>
-        <div class="row"><span class="k">OPERATOR</span><span class="v">GEORGE PATOURIS</span></div>
+    <div class="booking-panel">
+      <div id="my-cal-inline"></div>
+      <div class="booking-fallback" id="booking-fallback">
+        Booking is being set up right now — in the meantime, reach George directly:
+        <br><a href="tel:+35799630273">99 630 273</a> or <a href="https://wa.me/35799630273" target="_blank" rel="noopener">WhatsApp</a>.
       </div>
     </div>
 
-    <div class="layout">
-      <!-- CONTACT COLUMN -->
-      <aside class="contact-card reveal">
-        <span class="tag"><span class="live-dot"></span>Direct Contact — Available Now</span>
+    <div class="direct-divider">Or contact directly</div>
 
-        <a class="contact-line" href="tel:+35799630273">
-          <span class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </span>
-          <span class="meta"><span class="k">Phone</span><span class="v">99 630 273</span></span>
-        </a>
+    <div class="contact-grid">
+      <a class="contact-tile" href="tel:+35799630273">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </span>
+        <span class="label">Call</span>
+        <span class="value">99 630 273</span>
+      </a>
 
-        <a class="contact-line" href="https://wa.me/35799630273" target="_blank" rel="noopener">
-          <span class="ic">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.19-.15.31-.3.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12.99 2.06 1.31 2.35 1.46.29.15.46.13.63-.05.17-.19.71-.83.9-1.11.19-.29.38-.24.63-.14.26.1 1.65.78 1.93.92.29.15.48.22.55.34.07.13.07.72-.17 1.4z"/></svg>
-          </span>
-          <span class="meta"><span class="k">WhatsApp</span><span class="v">Message now</span></span>
-        </a>
+      <a class="contact-tile whatsapp" href="https://wa.me/35799630273" target="_blank" rel="noopener">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.19-.15.31-.3.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12.99 2.06 1.31 2.35 1.46.29.15.46.13.63-.05.17-.19.71-.83.9-1.11.19-.29.38-.24.63-.14.26.1 1.65.78 1.93.92.29.15.48.22.55.34.07.13.07.72-.17 1.4z"/></svg>
+        </span>
+        <span class="label">WhatsApp</span>
+        <span class="value">Message now</span>
+      </a>
 
-        <a class="contact-line" href="viber://chat?number=%2B35799630273">
-          <span class="ic">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.9 2c-.75-.06-2.65-.1-4.66.86C5.83 3.9 4.2 6.1 3.94 9.02c-.2 2.24-.02 4.42.53 5.98.44 1.25 1.1 2.24 1.85 2.96l-.44 3.29c-.04.32.28.57.58.44l3.4-1.5c1.1.28 2.29.35 3.5.2 3.87-.48 6.9-3.6 7.29-7.47.44-4.4-2.03-8.2-6.75-10.44a11 11 0 0 0-1-.48zm.36 15.06a.62.62 0 0 1-.7.53c-1.8-.24-3.4-1.08-4.7-2.42-1.3-1.34-2.08-2.98-2.3-4.8a.62.62 0 0 1 .55-.7l1.5-.17a.62.62 0 0 1 .65.4l.65 1.6a.62.62 0 0 1-.15.68l-.63.63c.4.83 1.03 1.6 1.83 2.28.8.68 1.65 1.15 2.53 1.4l.58-.68a.62.62 0 0 1 .67-.19l1.68.55a.62.62 0 0 1 .43.63z"/></svg>
-          </span>
-          <span class="meta"><span class="k">Viber</span><span class="v">Message now</span></span>
-        </a>
-      </aside>
+      <a class="contact-tile viber" href="viber://chat?number=%2B35799630273">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.9 2c-.75-.06-2.65-.1-4.66.86C5.83 3.9 4.2 6.1 3.94 9.02c-.2 2.24-.02 4.42.53 5.98.44 1.25 1.1 2.24 1.85 2.96l-.44 3.29c-.04.32.28.57.58.44l3.4-1.5c1.1.28 2.29.35 3.5.2 3.87-.48 6.9-3.6 7.29-7.47.44-4.4-2.03-8.2-6.75-10.44a11 11 0 0 0-1-.48zm.36 15.06a.62.62 0 0 1-.7.53c-1.8-.24-3.4-1.08-4.7-2.42-1.3-1.34-2.08-2.98-2.3-4.8a.62.62 0 0 1 .55-.7l1.5-.17a.62.62 0 0 1 .65.4l.65 1.6a.62.62 0 0 1-.15.68l-.63.63c.4.83 1.03 1.6 1.83 2.28.8.68 1.65 1.15 2.53 1.4l.58-.68a.62.62 0 0 1 .67-.19l1.68.55a.62.62 0 0 1 .43.63z"/></svg>
+        </span>
+        <span class="label">Viber</span>
+        <span class="value">Message now</span>
+      </a>
+    </div>
 
-      <!-- FORM COLUMN -->
-      <div class="form-card reveal d1">
-        <h2>Booking Request</h2>
-        <p class="sub">Fill this in and hit send — it opens your email app with everything pre-filled and addressed to George.</p>
-
-        <form id="bookingForm">
-          <div class="field-row">
-            <div class="field">
-              <label for="name">Full name</label>
-              <input type="text" id="name" name="name" required placeholder="Your name">
-            </div>
-            <div class="field">
-              <label for="phone">Phone number</label>
-              <input type="tel" id="phone" name="phone" required placeholder="Your contact number">
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="you@email.com">
-            </div>
-            <div class="field">
-              <label for="service">Service needed</label>
-              <select id="service" name="service" required>
-                <option value="" disabled selected>Choose a service</option>
-                <option value="Lifting Services">Lifting Services</option>
-                <option value="Moving Services">Moving Services</option>
-                <option value="Construction Works">Construction Works</option>
-                <option value="Not sure yet">Not sure yet</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="date">Preferred date</label>
-              <input type="date" id="date" name="date">
-            </div>
-            <div class="field">
-              <label for="location">Site location / address</label>
-              <input type="text" id="location" name="location" placeholder="Where's the job?">
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="details">Job details</label>
-            <textarea id="details" name="details" placeholder="What needs lifting or moving, site access notes, height/weight if known..."></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn">Send Booking Request</button>
-          <p class="form-note">This opens your device's email app addressed to George with your details filled in. Prefer something faster? Use WhatsApp or Viber on the left instead.</p>
-
-          <div class="confirm-box" id="confirmBox">
-            <strong>Email app opened.</strong> If nothing happened, your device may not have an email app configured — send the same details via WhatsApp or Viber instead.
-          </div>
-        </form>
-      </div>
+    <div class="plate-mini">
+      <div class="item"><span class="k">Model</span><span class="v">Merlo</span></div>
+      <div class="item"><span class="k">Reach</span><span class="v green">17m</span></div>
+      <div class="item"><span class="k">Finish</span><span class="v green">Green</span></div>
+      <div class="item"><span class="k">Operator</span><span class="v">G. Patouris</span></div>
     </div>
   </div>
 </main>
 
 <footer>
-  <p>G. PATOURIS — MERLO TELEHANDLER HIRE</p>
-  <p>17M REACH · GREEN MERLO · OWNER-OPERATED</p>
+  <p>G. PATOURIS — MERLO TELEHANDLER HIRE · 17M REACH · OWNER-OPERATED</p>
 </footer>
 
-<script>
-  document.getElementById('bookingForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const f = e.target;
-    const name = f.name.value.trim();
-    const phone = f.phone.value.trim();
-    const email = f.email.value.trim();
-    const service = f.service.value;
-    const date = f.date.value;
-    const location = f.location.value.trim();
-    const details = f.details.value.trim();
+<script type="text/javascript">
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal;
+      let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, ["initNamespace", namespace]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
 
-    const subject = `Booking Request — ${service || 'Merlo Hire'} — ${name}`;
-    const bodyLines = [
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      email ? `Email: ${email}` : null,
-      `Service: ${service}`,
-      date ? `Preferred date: ${date}` : null,
-      location ? `Site location: ${location}` : null,
-      details ? `\nJob details:\n${details}` : null
-    ].filter(Boolean).join('\n');
+  Cal("init", "merlo-17m", { origin: "https://cal.com" });
 
-    // NOTE: replace this placeholder with George's real email address.
-    const mailto = `mailto:bookings@patourislift.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines)}`;
-    window.location.href = mailto;
-
-    document.getElementById('confirmBox').classList.add('show');
+  Cal.ns["merlo-17m"]("inline", {
+    elementOrSelector: "#my-cal-inline",
+    config: { "layout": "month_view" },
+    calLink: "patouris/merlo-17m",
   });
-</script>
 
-<script>
-  // ===== CUSTOM FLASH CURSOR =====
-  (function(){
-    if(!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) return;
-    document.body.classList.add('has-custom-cursor');
+  Cal.ns["merlo-17m"]("ui", {
+    "theme": "dark",
+    "cssVarsPerTheme": {
+      "light": { "cal-brand": "#7CB518" },
+      "dark":  { "cal-brand": "#7CB518" }
+    },
+    "hideEventTypeDetails": false,
+    "layout": "month_view"
+  });
 
-    var flash = document.getElementById('flashCursor');
-    var dot = document.getElementById('cursorDot');
-    var mx = window.innerWidth/2, my = window.innerHeight/2;
-    var fx = mx, fy = my;
-
-    window.addEventListener('mousemove', function(e){
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
-
-      var el = document.elementFromPoint(mx, my);
-      var interactive = el && el.closest('a, button, input, select, textarea, .contact-line');
-      flash.classList.toggle('pointer', !!interactive);
-    });
-
-    function loop(){
-      fx += (mx - fx) * 0.2;
-      fy += (my - fy) * 0.2;
-      flash.style.transform = 'translate(' + fx + 'px,' + fy + 'px) translate(-50%,-50%)';
-      requestAnimationFrame(loop);
+  // Safety net: if the widget hasn't rendered anything after a few seconds
+  // (blocked script, network issue, event not published, etc.), fall back
+  // to direct contact instead of leaving a broken empty box.
+  setTimeout(function () {
+    var box = document.getElementById('my-cal-inline');
+    var fallback = document.getElementById('booking-fallback');
+    if (box && fallback && box.children.length === 0) {
+      box.style.display = 'none';
+      fallback.style.display = 'block';
     }
-    loop();
-  })();
-
-  // ===== SCROLL REVEAL =====
-  (function(){
-    var els = document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)){
-      els.forEach(function(el){ el.classList.add('in-view'); });
-      return;
-    }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('in-view');
-          io.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.15});
-    els.forEach(function(el){ io.observe(el); });
-  })();
-
-  // ===== PLATE TILT =====
-  (function(){
-    var plate = document.querySelector('.plate-mini');
-    if(!plate) return;
-    plate.addEventListener('mousemove', function(e){
-      var r = plate.getBoundingClientRect();
-      var px = (e.clientX - r.left)/r.width - 0.5;
-      var py = (e.clientY - r.top)/r.height - 0.5;
-      plate.style.transform = 'rotateX(' + (py*-8) + 'deg) rotateY(' + (px*8) + 'deg)';
-    });
-    plate.addEventListener('mouseleave', function(){
-      plate.style.transform = 'rotateX(0) rotateY(0)';
-    });
-  })();
-
-  // ===== SUBMIT BUTTON RIPPLE =====
-  (function(){
-    var btn = document.querySelector('.submit-btn');
-    if(!btn) return;
-    btn.addEventListener('click', function(e){
-      var r = btn.getBoundingClientRect();
-      var rip = document.createElement('span');
-      rip.className = 'ripple';
-      var size = Math.max(r.width, r.height) * 1.4;
-      rip.style.width = rip.style.height = size + 'px';
-      rip.style.left = (e.clientX - r.left - size/2) + 'px';
-      rip.style.top = (e.clientY - r.top - size/2) + 'px';
-      btn.appendChild(rip);
-      setTimeout(function(){ rip.remove(); }, 650);
-    });
-  })();
+  }, 6000);
 </script>
 
 </body>
